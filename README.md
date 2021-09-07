@@ -50,6 +50,11 @@ Pasos para ejecutar el proyecto:
 - La aplicación utiliza Bootstrap como Framework de Css.
 - La aplicación esta optimizada para pc/tablet con diseño responsivo a móvil
 
+## Credenciales de acceso a Login
+
+email: eve.holt@reqres.in
+password: cityslicka
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
