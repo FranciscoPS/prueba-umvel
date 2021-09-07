@@ -22,7 +22,7 @@ export class ApiService {
 
   loginByEmail(form: LoginInterface) {
     const direction = `${this.url}/login`;
-    return this._http.post(direction, form);
+    return this._http.post<ResponseInterface>(direction, form);
   }
 
 }
