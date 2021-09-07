@@ -18,6 +18,11 @@
             alt="Sample image"
           />
 
+          <!-- Error Alert -->
+          <div *ngIf="errorStatus" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+
           <!-- Email input -->
           <div class="form-outline mb-4">
             <label class="form-label" for="email">Email address</label>

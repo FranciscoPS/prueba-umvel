@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from './../../services/api/api.service';
 import { LoginInterface } from './../../models/login.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,12 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
   public loading: boolean = false;
+  public errorStatus: boolean = false;
+  public errorMessage: string = '';
 
   constructor(
-    private _apiService: ApiService
+    private _apiService: ApiService,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -35,14 +39,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSuccessLogin(res): void {
-    console.log(res)
-    alert('Welcome!');
+    this.errorStatus = false;
+    localStorage.setItem('token', res['token']);
+    this._router.navigate(['dashboard']);
     this.loading = false;
   }
 
   onBadRequest(err): void {
-    console.log(err);
-    alert('Invalid user or password, please try again');
+    this.errorStatus = true;
+    this.errorMessage = err['error'].error;
     this.loading = false;
   }
 
