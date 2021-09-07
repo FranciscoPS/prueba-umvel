@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   onBadRequest(err): void {
     console.log(err);
-    alert('Invalid user or password');
+    alert('Invalid user or password, please try again');
     this.loading = false;
   }
 
