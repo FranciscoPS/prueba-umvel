@@ -1,5 +1,9 @@
 $umvelColor: #ff616f;
 
+button:disabled {
+  opacity: 0.65;
+}
+
 .divider:after,
 .divider:before {
   content: "";
@@ -15,11 +19,11 @@ $umvelColor: #ff616f;
     height: 100%;
   }
 }
-.btn{
-  padding-left: 2.5rem; 
-  padding-right: 2.5rem; 
+.btn {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   color: #fff;
 }
-.bg-umvel{
-    background-color: $umvelColor;
+.bg-umvel {
+  background-color: $umvelColor;
 }
