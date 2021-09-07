@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './views/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { Error404Component } from './views/error404/error404.component';
 
 const routes: Routes = [
   {
@@ -18,8 +19,12 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
+    path: 'error',
+    component: Error404Component
+  },
+  {
     path: '**',
-    redirectTo: 'login'  
+    redirectTo: 'error'
   }
 ];
 
