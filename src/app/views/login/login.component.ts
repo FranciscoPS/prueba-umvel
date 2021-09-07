@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from './../../services/api/api.service';
-import { ResponseInterface } from './../../models/response.interface';
 import { LoginInterface } from './../../models/login.interface';
 
 @Component({
@@ -29,7 +28,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onLogin(form): void {
+  onLogin(form: LoginInterface): void {
     this.loading = true;
     const response = this._apiService.loginByEmail(form);
     response.subscribe(this.onSuccessLogin.bind(this), this.onBadRequest.bind(this));

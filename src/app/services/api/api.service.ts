@@ -9,18 +9,19 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private url: string = "https://reqres.in/api"
+  // Credentials: 
+  // variables = {
+  //   "email": "eve.holt@reqres.in",
+  //   "password": "cityslicka"
+  // }
+
+  private url: string = "https://reqres.in/api";
 
   constructor(
     private _http: HttpClient
   ) { }
 
-  variables = {
-    "email": "eve.holt@reqres.in",
-    "password": "cityslicka"
-  }
-
-  loginByEmail(form: LoginInterface) {
+  loginByEmail(form: LoginInterface): Observable<ResponseInterface> {
     const direction = `${this.url}/login`;
     return this._http.post<ResponseInterface>(direction, form);
   }
