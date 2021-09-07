@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
+  public loading: boolean = false;
 
   constructor() { }
 
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form): void {
+    this.loading = true;
     console.log(form)
   }
 
