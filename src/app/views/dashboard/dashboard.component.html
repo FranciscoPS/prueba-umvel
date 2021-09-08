@@ -64,13 +64,13 @@
     <nz-divider></nz-divider>
     <h5>Posts</h5>
     <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
-      <nz-list-item *ngFor="let post of postsCurrentUser">
+      <nz-list-item *ngFor="let post of postsCurrentUser; let idx = index">
         <nz-list-item-meta
           [nzAvatar]="currentUser.avatar"
           [nzDescription]="post.title + ':\n' + post.body"
         >
           <nz-list-item-meta-title>
-            <a href="https://ng.ant.design">Delete Post</a>
+            <a (click)="confirmDelete(post.id)">Delete Post</a>
           </nz-list-item-meta-title>
         </nz-list-item-meta>
       </nz-list-item>

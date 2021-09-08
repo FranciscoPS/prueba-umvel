@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api/api.service';
 import { user, listUsers } from './../../models/listUsers.interface';
 import { NotificationsService } from './../../services/notifications/notifications.service';
 import { postInterface } from './../../models/postsInterface';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _apiService: ApiService,
-    private _notification: NotificationsService
+    private _notification: NotificationsService,
+    private modal: NzModalService
   ) { }
 
   ngOnInit(): void {
@@ -49,7 +51,6 @@ export class DashboardComponent implements OnInit {
   showDetails(user: user): void {
     this.currentUser = user;
     this.showDetail = true;
-
     const response = this._apiService.getPosts(user.id)
     response.subscribe(this.setCurrentPosts.bind(this), this.onError.bind(this));
   }
@@ -58,6 +59,24 @@ export class DashboardComponent implements OnInit {
     this.postsCurrentUser = res;
     console.log(this.currentUser);
     console.log(this.postsCurrentUser);
+  }
+
+  confirmDelete(postId): void {
+    this.modal.confirm({
+      nzTitle: '<i>Do you Want to delete this post?</i>',
+      nzContent: '<b>Changes cannot be reversed</b>',
+      nzOnOk: () => this.deletePost(postId)
+    });
+  }
+
+  deletePost(postId): void {
+    const response = this._apiService.deletePost(postId);
+    response.subscribe(this.onSuccessDeletePost.bind(this), this.onError.bind(this));
+  }
+
+  onSuccessDeletePost(res): void {
+    this._notification.createSuccessNotification('The post was correctly deleted');
+    this.showDetail = false;
   }
 
   onError(error): void {

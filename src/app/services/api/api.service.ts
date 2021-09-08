@@ -33,4 +33,9 @@ export class ApiService {
     return this._http.get<Array<postInterface>>(direction);
   }
 
+  deletePost(postId: string): Observable<any> {
+    const direction = `${this.postsUrl}/posts/${postId}`;
+    return this._http.delete<any>(direction);
+  }
+
 }
