@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LoginInterface } from './../../models/login.interface';
-import { ResponseInterface } from './../../models/response.interface';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { listUsers, user } from './../../models/listUsers.interface';
+import { ResponseInterface, UpdateResponseInterface } from './../../models/response.interface';
+import { HttpClient } from '@angular/common/http';
+import { listUsers } from './../../models/listUsers.interface';
 import { postInterface } from './../../models/postsInterface';
 import { Observable } from 'rxjs';
 
@@ -28,9 +28,9 @@ export class ApiService {
     return this._http.get<listUsers>(direction);
   }
 
-  updateUser(userId: string, form): Observable<any> {
+  updateUser(userId: string, form): Observable<UpdateResponseInterface> {
     const direction = `${this.url}/users/${userId}`;
-    return this._http.post<any>(direction, form);
+    return this._http.post<UpdateResponseInterface>(direction, form);
   }
 
   getPosts(userId: string): Observable<Array<postInterface>> {
