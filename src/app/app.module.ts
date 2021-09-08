@@ -19,6 +19,9 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+
 
 registerLocaleData(en);
 
@@ -41,7 +44,9 @@ registerLocaleData(en);
     NzSpinModule,
     NzNotificationModule,
     NzCardModule,
-    NzDrawerModule
+    NzDrawerModule,
+    NzDescriptionsModule,
+    NzDividerModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
