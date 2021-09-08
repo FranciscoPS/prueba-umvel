@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api/api.service';
 import { user, listUsers } from './../../models/listUsers.interface';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NotificationsService } from './../../services/notifications/notifications.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _apiService: ApiService,
-    private notification: NzNotificationService
+    private _notification: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -35,24 +35,16 @@ export class DashboardComponent implements OnInit {
     this.users = this.listUsers['data'];
     this.nzTotalPages = Number(this.listUsers.total_pages) * 10;
     this.loading = false;
-    this.createNotification('success');
+    this._notification.createSuccessNotification('Users loaded correctly');
   }
 
   onError(error): void {
-    alert(error['error']);
     this.loading = false;
+    this._notification.createSuccessNotification(error['error']);
   }
 
   onIndexChange(page) {
     this.getUsersByPage(page);
-  }
-
-  createNotification(type: string): void {
-    this.notification.create(
-      type,
-      'Notification Title',
-      'This is the content of the notification. This is the content of the notification. This is the content of the notification.'
-    );
   }
 
 }
