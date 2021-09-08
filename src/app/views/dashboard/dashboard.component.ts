@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
 
   onSuccessDeletePost(res): void {
     this._notification.createSuccessNotification('The post was correctly deleted');
-    this.showDetail = false;
+    this.close();
   }
 
   editPersonalInfo(): void {

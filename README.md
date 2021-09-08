@@ -47,7 +47,8 @@ Pasos para ejecutar el proyecto:
 
 ## Detalles Técnicos
 
-- La aplicación utiliza Bootstrap como Framework de Css.
+- La aplicación utiliza Bootstrap y NG-Zorro para componentes y estilos
+- Se utiliza Font Awesome para los iconos
 - La aplicación esta optimizada para pc/tablet con diseño responsivo a móvil
 
 ## Credenciales de acceso a Login
