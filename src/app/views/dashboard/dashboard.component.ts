@@ -57,8 +57,6 @@ export class DashboardComponent implements OnInit {
 
   setCurrentPosts(res): void {
     this.postsCurrentUser = res;
-    console.log(this.currentUser);
-    console.log(this.postsCurrentUser);
   }
 
   confirmDelete(postId): void {

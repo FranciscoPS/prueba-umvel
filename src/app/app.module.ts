@@ -23,6 +23,7 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 
 registerLocaleData(en);
@@ -50,7 +51,8 @@ registerLocaleData(en);
     NzDescriptionsModule,
     NzDividerModule,
     NzListModule,
-    NzModalModule
+    NzModalModule,
+    NzButtonModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

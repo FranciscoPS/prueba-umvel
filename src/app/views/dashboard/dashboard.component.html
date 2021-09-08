@@ -1,6 +1,7 @@
 <app-header></app-header>
 
 <body>
+  <!-- Body Image -->
   <section class="d-flex justify-content-center">
     <img
       class="img-fluid"
@@ -8,6 +9,7 @@
       alt="Search Image"
     />
   </section>
+  <!-- Users List -->
   <section class="container mt-5">
     <div class="d-flex justify-content-center my-5">
       <nz-pagination
@@ -36,6 +38,7 @@
   </section>
 </body>
 
+<!-- Sidebar -->
 <nz-drawer
   *ngIf="currentUser"
   [nzClosable]="false"
@@ -46,7 +49,9 @@
   [nzWidth]="500"
 >
   <ng-container *nzDrawerContent>
+    <!-- User avatar -->
     <img class="img-fluid mb-4" [src]="currentUser.avatar" alt="User Avatar" />
+    <!-- User Personal Data -->
     <nz-descriptions [nzColumn]="2" nzTitle="Personal Data">
       <nz-descriptions-item nzTitle="Id" [nzSpan]="1">{{
         currentUser.id
@@ -61,8 +66,16 @@
         currentUser.last_name
       }}</nz-descriptions-item>
     </nz-descriptions>
+    <!-- Edit, Save and  Delete Buttons -->
+    <div class="buttons-area">
+      <button nz-button nzType="primary" nzSize="large">
+        <i class="fa fa-edit" style="color: #fff"></i>
+      </button>
+    </div>
     <nz-divider></nz-divider>
+    <!-- Posts -->
     <h5>Posts</h5>
+    <!-- Posts List -->
     <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
       <nz-list-item *ngFor="let post of postsCurrentUser; let idx = index">
         <nz-list-item-meta
