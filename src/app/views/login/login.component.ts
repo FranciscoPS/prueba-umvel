@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from './../../services/api/api.service';
 import { LoginInterface } from './../../models/login.interface';
 import { Router } from '@angular/router';
+import { NotificationsService } from '../../services/notifications/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,11 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
   public loading: boolean = false;
-  public errorStatus: boolean = false;
-  public errorMessage: string = '';
 
   constructor(
     private _apiService: ApiService,
-    private _router: Router
+    private _router: Router,
+    private _notification: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -45,15 +45,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSuccessLogin(res): void {
-    this.errorStatus = false;
     localStorage.setItem('token', res['token']);
     this._router.navigate(['dashboard']);
     this.loading = false;
   }
 
   onBadRequest(err): void {
-    this.errorStatus = true;
-    this.errorMessage = err['error'].error;
+    this._notification.createErrorNotification(err['error'].error);
     this.loading = false;
   }
 
