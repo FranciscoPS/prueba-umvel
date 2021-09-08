@@ -100,6 +100,14 @@ export class DashboardComponent implements OnInit {
   }
 
   saveData(): void {
+    const currentId = this.currentUser.id;
+    const form = this.personalInfoForm.value;
+    const response = this._apiService.updateUser(currentId, form);
+    response.subscribe({
+      next: res => {
+        console.log(res)
+      }
+    })
     this._notification.createSuccessNotification('The info was correctly saved!');
     this.editable = false;
   }

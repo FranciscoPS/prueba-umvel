@@ -28,6 +28,11 @@ export class ApiService {
     return this._http.get<listUsers>(direction);
   }
 
+  updateUser(userId: string, form): Observable<any> {
+    const direction = `${this.url}/users/${userId}`;
+    return this._http.post<any>(direction, form);
+  }
+
   getPosts(userId: string): Observable<Array<postInterface>> {
     const direction = `${this.postsUrl}/posts?userId=${userId}`;
     return this._http.get<Array<postInterface>>(direction);
