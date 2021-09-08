@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api/api.service';
 import { user, listUsers } from './../../models/listUsers.interface';
 import { NotificationsService } from './../../services/notifications/notifications.service';
+import { postInterface } from './../../models/postsInterface';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +16,7 @@ export class DashboardComponent implements OnInit {
   public listUsers: listUsers;
   public nzTotalPages: number = 0;
   public users: Array<user> = [];
+  public postsCurrentUser: Array<postInterface> = [];
   public currentUser: user;
 
   constructor(
@@ -40,11 +42,6 @@ export class DashboardComponent implements OnInit {
     this._notification.createSuccessNotification('Users loaded correctly');
   }
 
-  onError(error): void {
-    this.loading = false;
-    this._notification.createSuccessNotification(error['error']);
-  }
-
   onIndexChange(page): void {
     this.getUsersByPage(page);
   }
@@ -52,7 +49,20 @@ export class DashboardComponent implements OnInit {
   showDetails(user: user): void {
     this.currentUser = user;
     this.showDetail = true;
+
+    const response = this._apiService.getPosts(user.id)
+    response.subscribe(this.setCurrentPosts.bind(this), this.onError.bind(this));
+  }
+
+  setCurrentPosts(res): void {
+    this.postsCurrentUser = res;
     console.log(this.currentUser);
+    console.log(this.postsCurrentUser);
+  }
+
+  onError(error): void {
+    this.loading = false;
+    this._notification.createSuccessNotification(error['error']);
   }
 
   close(): void {

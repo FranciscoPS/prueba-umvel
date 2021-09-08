@@ -62,7 +62,13 @@
       }}</nz-descriptions-item>
     </nz-descriptions>
     <nz-divider></nz-divider>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
+    <nz-descriptions nzTitle="Posts">
+      <nz-descriptions-item
+        [nzTitle]="post.title"
+        *ngFor="let post of postsCurrentUser"
+      >
+        {{ post.body }}
+      </nz-descriptions-item>
+    </nz-descriptions>
   </ng-container>
 </nz-drawer>
