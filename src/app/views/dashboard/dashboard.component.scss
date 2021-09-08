@@ -6,3 +6,8 @@ i {
     opacity: 0.9;
   }
 }
+@media (max-width: 768px) {
+  .footer {
+    display: none;
+  }
+}

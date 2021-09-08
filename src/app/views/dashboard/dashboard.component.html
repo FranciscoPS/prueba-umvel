@@ -46,7 +46,7 @@
   nzPlacement="right"
   [nzTitle]="currentUser.first_name + ' ' + currentUser.last_name"
   (nzOnClose)="close()"
-  [nzWidth]="500"
+  [nzWidth]="345"
 >
   <ng-container *nzDrawerContent>
     <!-- User avatar -->
@@ -170,3 +170,5 @@
     </nz-list>
   </ng-container>
 </nz-drawer>
+
+<app-footer class="footer"></app-footer>
