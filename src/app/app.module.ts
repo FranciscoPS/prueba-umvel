@@ -39,7 +39,7 @@ registerLocaleData(en);
     NzPaginationModule,
     NzSpinModule,
     NzNotificationModule,
-    NzCardModule
+    NzCardModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
