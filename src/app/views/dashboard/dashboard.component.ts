@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api/api.service';
-import { user } from './../../models/listUsers.interface';
+import { user, listUsers } from './../../models/listUsers.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,12 +9,14 @@ import { user } from './../../models/listUsers.interface';
 })
 export class DashboardComponent implements OnInit {
 
+  public listUsers: listUsers;
+  public nzTotalPages: number = 0;
   public users: Array<user> = [];
 
   constructor(private _apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.getUsersByPage(1234);
+    this.getUsersByPage(1);
   }
 
   getUsersByPage(page: number): void {
@@ -23,12 +25,17 @@ export class DashboardComponent implements OnInit {
   }
 
   onSuccessGetUsers(response): void {
-    this.users = response['data'];
-    console.log(this.users)
+    this.listUsers = response;
+    this.users = this.listUsers['data'];
+    this.nzTotalPages = Number(this.listUsers.total_pages) * 10;
   }
 
   onError(error): void {
     alert(error['error']);
+  }
+
+  onIndexChange(page) {
+    this.getUsersByPage(page);
   }
 
 }

@@ -1,11 +1,31 @@
 <app-header></app-header>
-<p>dashboard works!</p>
-<nz-card style="width: 300px" nzTitle="Card title" [nzExtra]="extraTemplate">
-  <p>Card content</p>
-  <p>Card content</p>
-  <p>Card content</p>
-</nz-card>
-<ng-template #extraTemplate>
-  <a>More</a>
-</ng-template>
+
+<div class="container my-5" *ngIf="listUsers">
+  <nz-table #basicTable [nzData]="users" [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of users">
+        <td>{{ data.first_name }}</td>
+        <td>{{ data.last_name }}</td>
+        <td>{{ data.email }}</td>
+        <td>Watch details</td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-pagination
+    (nzPageIndexChange)="onIndexChange($event)"
+    class="mt-4"
+    [nzPageIndex]="1"
+    [nzTotal]="nzTotalPages"
+  ></nz-pagination>
+</div>
+
 <app-footer></app-footer>
