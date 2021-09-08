@@ -67,52 +67,54 @@
       }}</nz-descriptions-item>
     </nz-descriptions>
     <!-- User Personal Data Form -->
-    <form
-      *ngIf="editable"
-      nz-form
-      [formGroup]="personalInfoForm"
-      class="login-form"
-    >
-      <!-- Email -->
-      <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email"
-          >E-mail</nz-form-label
-        >
-        <nz-form-control
-          [nzSm]="14"
-          [nzXs]="24"
-          nzErrorTip="The input is not valid E-mail!"
-        >
-          <input nz-input formControlName="email" id="email" />
-        </nz-form-control>
-      </nz-form-item>
-      <!-- First Name -->
-      <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
-          <span>First Name</span>
-        </nz-form-label>
-        <nz-form-control
-          [nzSm]="14"
-          [nzXs]="24"
-          nzErrorTip="Please input your First Name!"
-        >
-          <input nz-input id="nickname" formControlName="first_name" />
-        </nz-form-control>
-      </nz-form-item>
-      <!-- Last Name -->
-      <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
-          <span>Last Name</span>
-        </nz-form-label>
-        <nz-form-control
-          [nzSm]="14"
-          [nzXs]="24"
-          nzErrorTip="Please input your Last Name!"
-        >
-          <input nz-input id="nickname" formControlName="last_name" />
-        </nz-form-control>
-      </nz-form-item>
-    </form>
+    <nz-spin [nzSpinning]="saving">
+      <form
+        *ngIf="editable"
+        nz-form
+        [formGroup]="personalInfoForm"
+        class="login-form"
+      >
+        <!-- Email -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email"
+            >E-mail</nz-form-label
+          >
+          <nz-form-control
+            [nzSm]="14"
+            [nzXs]="24"
+            nzErrorTip="The input is not valid E-mail!"
+          >
+            <input nz-input formControlName="email" id="email" />
+          </nz-form-control>
+        </nz-form-item>
+        <!-- First Name -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
+            <span>First Name</span>
+          </nz-form-label>
+          <nz-form-control
+            [nzSm]="14"
+            [nzXs]="24"
+            nzErrorTip="Please input your First Name!"
+          >
+            <input nz-input id="nickname" formControlName="first_name" />
+          </nz-form-control>
+        </nz-form-item>
+        <!-- Last Name -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
+            <span>Last Name</span>
+          </nz-form-label>
+          <nz-form-control
+            [nzSm]="14"
+            [nzXs]="24"
+            nzErrorTip="Please input your Last Name!"
+          >
+            <input nz-input id="nickname" formControlName="last_name" />
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </nz-spin>
     <!-- Edit, Save and  Delete Buttons -->
     <div class="buttons-area">
       <button
@@ -126,7 +128,7 @@
       </button>
       <div *ngIf="editable">
         <button
-          [disabled]="!personalInfoForm.valid"
+          [disabled]="!personalInfoForm.valid || saving"
           (click)="saveData()"
           style="margin-left: 20px"
           nz-button
@@ -136,6 +138,7 @@
           <i class="fa fa-save" style="color: #fff"></i>
         </button>
         <button
+          [disabled]="!personalInfoForm.valid || saving"
           (click)="undo()"
           style="margin-left: 20px"
           class="ml-4"

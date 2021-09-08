@@ -14,6 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DashboardComponent implements OnInit {
 
   public loading: boolean = false;
+  public saving: boolean = false;
   public showDetail: boolean = false;
   public editable: boolean = false;
   public listUsers: listUsers;
@@ -96,10 +97,12 @@ export class DashboardComponent implements OnInit {
 
   onError(error): void {
     this.loading = false;
+    this.saving = false;
     this._notification.createSuccessNotification(error['error']);
   }
 
   saveData(): void {
+    this.saving = true;
     const currentId = this.currentUser.id;
     const form = this.personalInfoForm.value;
     const response = this._apiService.updateUser(currentId, form);
@@ -108,16 +111,19 @@ export class DashboardComponent implements OnInit {
 
   onSuccesSaveData(res): void {
     this._notification.createSuccessNotification(`The info was correctly saved! Info updated at ${res['createdAt']}`);
+    this.saving = false;
     this.editable = false;
   }
 
   undo(): void {
     this.editable = false;
+    this.saving = false;
   }
 
   close(): void {
     this.showDetail = false;
     this.editable = false;
+    this.saving = false;
   }
 
 }
