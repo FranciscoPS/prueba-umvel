@@ -116,6 +116,7 @@
     <!-- Edit, Save and  Delete Buttons -->
     <div class="buttons-area">
       <button
+        *ngIf="!editable"
         (click)="editPersonalInfo()"
         nz-button
         nzType="primary"
@@ -123,6 +124,28 @@
       >
         <i class="fa fa-edit" style="color: #fff"></i>
       </button>
+      <div *ngIf="editable">
+        <button
+          (click)="editPersonalInfo()"
+          style="margin-left: 20px"
+          nz-button
+          nzType="primary"
+          nzSize="large"
+        >
+          <i class="fa fa-save" style="color: #fff"></i>
+        </button>
+        <button
+          (click)="editPersonalInfo()"
+          style="margin-left: 20px"
+          class="ml-4"
+          nz-button
+          nzType="primary"
+          nzSize="large"
+          nzDanger
+        >
+          <i class="fa fa-trash" style="color: #fff"></i>
+        </button>
+      </div>
     </div>
     <nz-divider></nz-divider>
     <!-- Posts -->
