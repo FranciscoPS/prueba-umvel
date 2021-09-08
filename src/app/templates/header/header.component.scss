@@ -2,6 +2,29 @@ i {
   font-size: 30px;
   cursor: pointer;
   &:hover {
-    color: #196c34;
+    color: #ff616f;
+  }
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5px;
+  .logo {
+    max-width: 400px;
+    border-radius: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    justify-content: center;
+    align-items: flex-end;
+    .logo {
+      width: 100%;
+    }
+    i {
+      font-size: 25px;
+      margin-left: 20px;
+    }
   }
 }
