@@ -11,9 +11,11 @@ import { NotificationsService } from './../../services/notifications/notificatio
 export class DashboardComponent implements OnInit {
 
   public loading: boolean = false;
+  public showDetail: boolean = false;
   public listUsers: listUsers;
   public nzTotalPages: number = 0;
   public users: Array<user> = [];
+  public currentUser: user;
 
   constructor(
     private _apiService: ApiService,
@@ -43,8 +45,18 @@ export class DashboardComponent implements OnInit {
     this._notification.createSuccessNotification(error['error']);
   }
 
-  onIndexChange(page) {
+  onIndexChange(page): void {
     this.getUsersByPage(page);
+  }
+
+  showDetails(user: user): void {
+    this.currentUser = user;
+    this.showDetail = true;
+    console.log(this.currentUser);
+  }
+
+  close(): void {
+    this.showDetail = false;
   }
 
 }

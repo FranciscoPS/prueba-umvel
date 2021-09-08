@@ -1,37 +1,52 @@
 <app-header></app-header>
 
-<section class="d-flex justify-content-center">
-  <img
-    class="img-fluid"
-    src="./../../../assets/search.jpg"
-    alt="Search Image"
-  />
-</section>
-<section class="container mt-5">
-  <div class="d-flex justify-content-center my-5">
-    <nz-pagination
-      [nzPageIndex]="1"
-      [nzTotal]="nzTotalPages"
-      (nzPageIndexChange)="onIndexChange($event)"
-    ></nz-pagination>
-  </div>
-  <nz-spin [nzSpinning]="loading">
-    <div class="row">
-      <div class="col-sm-4 col-md-3 col-lg-2 mb-3" *ngFor="let user of users">
-        <div class="card">
-          <nz-card nzHoverable [nzCover]="coverTemplate">
-            <nz-card-meta
-              [nzTitle]="user.first_name + ' ' + user.last_name"
-              [nzDescription]="user.email"
-            ></nz-card-meta>
-          </nz-card>
-          <ng-template #coverTemplate>
-            <img alt="avatar" [src]="user.avatar" />
-          </ng-template>
+<body>
+  <section class="d-flex justify-content-center">
+    <img
+      class="img-fluid"
+      src="./../../../assets/search.jpg"
+      alt="Search Image"
+    />
+  </section>
+  <section class="container mt-5">
+    <div class="d-flex justify-content-center my-5">
+      <nz-pagination
+        [nzPageIndex]="1"
+        [nzTotal]="nzTotalPages"
+        (nzPageIndexChange)="onIndexChange($event)"
+      ></nz-pagination>
+    </div>
+    <nz-spin [nzSpinning]="loading">
+      <div class="row">
+        <div class="col-sm-4 col-md-3 col-lg-2 mb-3" *ngFor="let user of users">
+          <div class="card" (click)="showDetails(user)">
+            <nz-card nzHoverable [nzCover]="coverTemplate">
+              <nz-card-meta
+                [nzTitle]="user.first_name + ' ' + user.last_name"
+                [nzDescription]="user.email"
+              ></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate>
+              <img alt="avatar" [src]="user.avatar" />
+            </ng-template>
+          </div>
         </div>
       </div>
-    </div>
-  </nz-spin>
-</section>
+    </nz-spin>
+  </section>
+</body>
 
-<app-footer></app-footer>
+<nz-drawer
+  *ngIf="currentUser"
+  [nzClosable]="false"
+  [nzVisible]="showDetail"
+  nzPlacement="right"
+  [nzTitle]="currentUser.first_name + ' ' + currentUser.last_name"
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+  </ng-container>
+</nz-drawer>
