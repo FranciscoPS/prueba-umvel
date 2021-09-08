@@ -52,11 +52,11 @@
     <!-- User avatar -->
     <img class="img-fluid mb-4" [src]="currentUser.avatar" alt="User Avatar" />
     <!-- User Personal Data -->
-    <nz-descriptions [nzColumn]="2" nzTitle="Personal Data">
+    <nz-descriptions *ngIf="!editable" [nzColumn]="2" nzTitle="Personal Data">
       <nz-descriptions-item nzTitle="Id" [nzSpan]="1">{{
         currentUser.id
       }}</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="Account" [nzSpan]="1">{{
+      <nz-descriptions-item nzTitle="Email" [nzSpan]="1">{{
         currentUser.email
       }}</nz-descriptions-item>
       <nz-descriptions-item nzTitle="First Name" [nzSpan]="1">{{
@@ -66,9 +66,61 @@
         currentUser.last_name
       }}</nz-descriptions-item>
     </nz-descriptions>
+    <!-- User Personal Data Form -->
+    <form
+      *ngIf="editable"
+      nz-form
+      [formGroup]="personalInfoForm"
+      class="login-form"
+    >
+      <!-- Email -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email"
+          >E-mail</nz-form-label
+        >
+        <nz-form-control
+          [nzSm]="14"
+          [nzXs]="24"
+          nzErrorTip="The input is not valid E-mail!"
+        >
+          <input nz-input formControlName="email" id="email" />
+        </nz-form-control>
+      </nz-form-item>
+      <!-- First Name -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
+          <span>First Name</span>
+        </nz-form-label>
+        <nz-form-control
+          [nzSm]="14"
+          [nzXs]="24"
+          nzErrorTip="Please input your First Name!"
+        >
+          <input nz-input id="nickname" formControlName="first_name" />
+        </nz-form-control>
+      </nz-form-item>
+      <!-- Last Name -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
+          <span>Last Name</span>
+        </nz-form-label>
+        <nz-form-control
+          [nzSm]="14"
+          [nzXs]="24"
+          nzErrorTip="Please input your Last Name!"
+        >
+          <input nz-input id="nickname" formControlName="last_name" />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
     <!-- Edit, Save and  Delete Buttons -->
     <div class="buttons-area">
-      <button nz-button nzType="primary" nzSize="large">
+      <button
+        (click)="editPersonalInfo()"
+        nz-button
+        nzType="primary"
+        nzSize="large"
+      >
         <i class="fa fa-edit" style="color: #fff"></i>
       </button>
     </div>

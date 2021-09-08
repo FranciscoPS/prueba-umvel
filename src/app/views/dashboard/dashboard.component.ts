@@ -4,6 +4,7 @@ import { user, listUsers } from './../../models/listUsers.interface';
 import { NotificationsService } from './../../services/notifications/notifications.service';
 import { postInterface } from './../../models/postsInterface';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,21 +15,32 @@ export class DashboardComponent implements OnInit {
 
   public loading: boolean = false;
   public showDetail: boolean = false;
+  public editable: boolean = false;
   public listUsers: listUsers;
   public nzTotalPages: number = 0;
   public users: Array<user> = [];
   public postsCurrentUser: Array<postInterface> = [];
   public currentUser: user;
+  public personalInfoForm: FormGroup;
 
   constructor(
     private _apiService: ApiService,
     private _notification: NotificationsService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private _formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.loading = true;
     this.getUsersByPage(1);
+  }
+
+  initPersonalInfoForm() {
+    this.personalInfoForm = this._formBuilder.group({
+      email: [this.currentUser.email, [Validators.required, Validators.email]],
+      first_name: [this.currentUser.first_name, [Validators.required]],
+      last_name: [this.currentUser.last_name, [Validators.required]],
+    })
   }
 
   getUsersByPage(page: number): void {
@@ -77,6 +89,11 @@ export class DashboardComponent implements OnInit {
     this.showDetail = false;
   }
 
+  editPersonalInfo(): void {
+    this.initPersonalInfoForm();
+    this.editable = true;
+  }
+
   onError(error): void {
     this.loading = false;
     this._notification.createSuccessNotification(error['error']);
@@ -84,6 +101,7 @@ export class DashboardComponent implements OnInit {
 
   close(): void {
     this.showDetail = false;
+    this.editable = false;
   }
 
 }
