@@ -126,7 +126,8 @@
       </button>
       <div *ngIf="editable">
         <button
-          (click)="editPersonalInfo()"
+          [disabled]="!personalInfoForm.valid"
+          (click)="saveData()"
           style="margin-left: 20px"
           nz-button
           nzType="primary"
@@ -135,7 +136,7 @@
           <i class="fa fa-save" style="color: #fff"></i>
         </button>
         <button
-          (click)="editPersonalInfo()"
+          (click)="undo()"
           style="margin-left: 20px"
           class="ml-4"
           nz-button
@@ -143,7 +144,7 @@
           nzSize="large"
           nzDanger
         >
-          <i class="fa fa-trash" style="color: #fff"></i>
+          <i class="fa fa-undo" style="color: #fff"></i>
         </button>
       </div>
     </div>

@@ -99,6 +99,15 @@ export class DashboardComponent implements OnInit {
     this._notification.createSuccessNotification(error['error']);
   }
 
+  saveData(): void {
+    this._notification.createSuccessNotification('The info was correctly saved!');
+    this.editable = false;
+  }
+
+  undo(): void {
+    this.editable = false;
+  }
+
   close(): void {
     this.showDetail = false;
     this.editable = false;
