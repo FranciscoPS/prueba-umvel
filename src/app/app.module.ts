@@ -21,7 +21,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-
+import { NzListModule } from 'ng-zorro-antd/list';
 
 registerLocaleData(en);
 
@@ -46,7 +46,8 @@ registerLocaleData(en);
     NzCardModule,
     NzDrawerModule,
     NzDescriptionsModule,
-    NzDividerModule
+    NzDividerModule,
+    NzListModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
